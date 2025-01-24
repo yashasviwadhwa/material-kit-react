@@ -7,6 +7,8 @@ import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgr
 import { varAlpha } from 'src/theme/styles';
 import { AuthLayout } from 'src/layouts/auth';
 import { DashboardLayout } from 'src/layouts/dashboard';
+import Student from 'src/pages/student';
+import Logout from 'src/pages/logout';
 
 // ----------------------------------------------------------------------
 
@@ -47,6 +49,8 @@ export function Router() {
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
+        { path: 'student', element: <Student /> },
+        { path: 'logout', element: <Logout /> },
       ],
     },
     {

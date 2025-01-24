@@ -43,4 +43,14 @@ export const navData = [
     path: '/404',
     icon: icon('ic-disabled'),
   },
+  {
+    title: 'Student Page',
+    path: '/student',
+    icon: icon('ic-disabled'),
+  },
+  {
+    title: 'Logout',
+    path: '/Logout',
+    icon: icon('ic-disabled'),
+  },
 ];

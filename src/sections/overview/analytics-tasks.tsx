@@ -160,7 +160,7 @@ function Item({ item, checked, onChange, sx, ...other }: ItemProps) {
             },
           }}
         >
-          <MenuItem onClick={handleMarkComplete}>
+          {/* <MenuItem onClick={handleMarkComplete}>
             <Iconify icon="solar:check-circle-bold" />
             Mark complete
           </MenuItem>
@@ -170,10 +170,16 @@ function Item({ item, checked, onChange, sx, ...other }: ItemProps) {
             Edit
           </MenuItem>
 
+
+          <MenuItem onClick={handleEdit}>
+            <Iconify icon="solar:pen-bold" />
+            Add
+          </MenuItem>
+
           <MenuItem onClick={handleShare}>
             <Iconify icon="solar:share-bold" />
             Share
-          </MenuItem>
+          </MenuItem> */}
 
           <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
             <Iconify icon="solar:trash-bin-trash-bold" />

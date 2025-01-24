@@ -12,6 +12,8 @@ import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
 
 import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
+import ModelBox from 'src/components/model-box/Model-box';
+import { useFirebase } from 'src/Context/FirebaseContext';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +33,21 @@ type UserTableRowProps = {
   onSelectRow: () => void;
 };
 
+interface FormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+  department: string;
+  position: string;
+  notes: string;
+}
+
 export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) {
   const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(null);
 
@@ -41,6 +58,16 @@ export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) 
   const handleClosePopover = useCallback(() => {
     setOpenPopover(null);
   }, []);
+
+  const [open, setOpen] = useState<boolean>(false);
+
+
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const handleSubmit = (data: FormValues) => {
+
+    console.log(data);
+  };
+
 
   return (
     <>
@@ -102,6 +129,12 @@ export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) 
             },
           }}
         >
+
+          <MenuItem onClick={handleClosePopover}>
+            <Iconify icon="solar:eye-bold" />
+            View
+          </MenuItem>
+
           <MenuItem onClick={handleClosePopover}>
             <Iconify icon="solar:pen-bold" />
             Edit
@@ -111,6 +144,13 @@ export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) 
             <Iconify icon="solar:trash-bin-trash-bold" />
             Delete
           </MenuItem>
+
+          <MenuItem onClick={() => setOpenModal(true)}>
+            <Iconify icon="solar:add-circle-bold" />
+            Add
+          </MenuItem>
+
+          <ModelBox open={openModal} onClose={() => setOpenModal(false)} onSubmit={handleSubmit} />
         </MenuList>
       </Popover>
     </>

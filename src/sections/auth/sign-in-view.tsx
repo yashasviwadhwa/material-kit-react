@@ -12,17 +12,53 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useRouter } from 'src/routes/hooks';
 
 import { Iconify } from 'src/components/iconify';
+import { useFirebase } from 'src/Context/FirebaseContext';
 
-// ----------------------------------------------------------------------
 
 export function SignInView() {
   const router = useRouter();
 
+  const { loginWithEmail, loginWithGoogle } = useFirebase();
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSignIn = useCallback(() => {
-    router.push('/');
-  }, [router]);
+
+  const handleSignIn = useCallback(async () => {
+    setLoading(true);
+    setError('');
+    try {
+      console.table({ email, password })
+      await loginWithEmail(email, password);
+      router.push('/');
+    } catch (err) {
+
+      setError('Invalid email or password. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }, [email, password, loginWithEmail, router]);
+
+  const handleGoogleSignIn = useCallback(async () => {
+    setLoading(true);
+    setError('');
+    try {
+
+      await loginWithGoogle();
+      router.push('/');
+    } catch (err) {
+      console.log('Invalid email or password. Please try again.');
+      setError('Google sign-in failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }, [loginWithGoogle, router]);
+
+  // const handleSignIn = useCallback(() => {
+  //   router.push('/');
+  // }, [router]);
 
   const renderForm = (
     <Box display="flex" flexDirection="column" alignItems="flex-end">
@@ -30,7 +66,8 @@ export function SignInView() {
         fullWidth
         name="email"
         label="Email address"
-        defaultValue="hello@gmail.com"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         InputLabelProps={{ shrink: true }}
         sx={{ mb: 3 }}
       />
@@ -43,7 +80,10 @@ export function SignInView() {
         fullWidth
         name="password"
         label="Password"
-        defaultValue="@demo1234"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+
+        // defaultValue="@demo1234"
         InputLabelProps={{ shrink: true }}
         type={showPassword ? 'text' : 'password'}
         InputProps={{
@@ -108,3 +148,11 @@ export function SignInView() {
     </>
   );
 }
+function setLoading(arg0: boolean) {
+  throw new Error('Function not implemented.');
+}
+
+function setError(arg0: string) {
+  throw new Error('Function not implemented.');
+}
+
