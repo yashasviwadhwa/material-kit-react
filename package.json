@@ -1,5 +1,6 @@
 {
   "name": "@minimal/material-kit-react",
+  "homepage": "https://yashasviwadhwa.github.io/material-kit-react/",
   "author": "minimals.cc",
   "licence": "MIT",
   "version": "2.0.0",
@@ -17,7 +18,8 @@
     "re:start": "yarn rm:all && yarn install && yarn dev",
     "re:build": "yarn rm:all && yarn install && yarn build",
     "re:build-npm": "npm run rm:all && npm install && npm run build",
-    "dev:host": "vite --host"
+    "dev:host": "vite --host",
+    "deploy": "gh-pages -d dist"
   },
   "engines": {
     "node": "20.x"
@@ -36,6 +38,7 @@
     "dayjs": "^1.11.13",
     "firebase": "^11.2.0",
     "formik": "^2.4.6",
+    "gh-pages": "^6.3.0",
     "history": "^5.3.0",
     "react": "^18.3.1",
     "react-apexcharts": "^1.4.1",
